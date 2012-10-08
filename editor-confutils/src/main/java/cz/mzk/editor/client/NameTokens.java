@@ -54,6 +54,9 @@ public class NameTokens {
     /** The Constant HOME. */
     public static final String HOME = "home";
 
+    /** The Constant MENU. */
+    public static final String MENU = "menu";
+
     /** The Constant MODIFY. */
     public static final String MODIFY = "modify";
 
