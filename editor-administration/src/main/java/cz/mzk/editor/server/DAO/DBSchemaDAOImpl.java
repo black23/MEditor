@@ -43,6 +43,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import cz.mzk.editor.client.util.Constants;
+import cz.mzk.editor.server.util.ScriptRunner;
 
 /**
  * @author Jiri Kremser
