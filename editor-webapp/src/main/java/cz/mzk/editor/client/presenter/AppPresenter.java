@@ -75,10 +75,12 @@ public class AppPresenter
         implements MyUiHandlers {
 
     @ContentSlot
-    public static final Type<RevealContentHandler<?>> TYPE_MEDIT_MAIN_CONTENT = Constants.TYPE_MEDIT_MAIN_CONTENT;
+    public static final Type<RevealContentHandler<?>> TYPE_MEDIT_MAIN_CONTENT =
+            Constants.TYPE_MEDIT_MAIN_CONTENT;
 
     @ContentSlot
-    public static final Type<RevealContentHandler<?>> TYPE_MEDIT_LEFT_CONTENT = Constants.TYPE_MEDIT_LEFT_CONTENT;
+    public static final Type<RevealContentHandler<?>> TYPE_MEDIT_LEFT_CONTENT =
+            Constants.TYPE_MEDIT_LEFT_CONTENT;
 
     private LangConstants lang;
     private volatile boolean unknown = true;

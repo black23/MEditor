@@ -37,6 +37,7 @@ import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 import cz.mzk.editor.client.presenter.AdminHomePresenter;
+import cz.mzk.editor.client.presenter.AdminMenuPresenter;
 import cz.mzk.editor.client.presenter.AdminPresenter;
 
 // TODO: Auto-generated Javadoc
@@ -66,9 +67,11 @@ public interface AdminGinjector
      * if you're using @ProxyCodeSplit
      */
 
+    AsyncProvider<AdminHomePresenter> getAdminHomePresenter();
+
     Provider<AdminPresenter> getAdminPresenter();
 
-    AsyncProvider<AdminHomePresenter> getAdminHomePresenter();
+    Provider<AdminMenuPresenter> getAdminMenuPresenter();
 
     //    AsyncProvider<UserPresenter> getUserPresenter();
 

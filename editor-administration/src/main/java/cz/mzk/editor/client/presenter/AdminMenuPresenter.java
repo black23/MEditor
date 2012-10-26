@@ -31,14 +31,12 @@ import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
-import com.gwtplatform.mvp.client.annotations.NameToken;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+import com.gwtplatform.mvp.client.proxy.Proxy;
 
 import cz.mzk.editor.client.LangConstants;
-import cz.mzk.editor.client.NameTokens;
-import cz.mzk.editor.client.uihandlers.MenuUiHandlers;
+import cz.mzk.editor.client.uihandlers.AdminMenuUiHandlers;
 
 /**
  * @author Matous Jobanek
@@ -51,10 +49,9 @@ public class AdminMenuPresenter
      * @author Matous Jobanek
      * @version Oct 8, 2012 The Interface MyProxy.
      */
-    @ProxyCodeSplit
-    @NameToken(NameTokens.MENU)
+    @ProxyStandard
     public interface MyProxy
-            extends ProxyPlace<AdminHomePresenter> {
+            extends Proxy<AdminMenuPresenter> {
 
     }
 
@@ -63,7 +60,7 @@ public class AdminMenuPresenter
      * @version Oct 8, 2012 The Interface MyView.
      */
     public interface MyView
-            extends View, HasUiHandlers<MenuUiHandlers> {
+            extends View, HasUiHandlers<AdminMenuUiHandlers> {
 
     }
 
@@ -78,11 +75,11 @@ public class AdminMenuPresenter
      */
     @Inject
     public AdminMenuPresenter(EventBus eventBus,
-                         MyView view,
-                         MyProxy proxy,
-                         final DispatchAsync dispatcher,
-                         final PlaceManager placeManager,
-                         final LangConstants lang) {
+                              MyView view,
+                              MyProxy proxy,
+                              final DispatchAsync dispatcher,
+                              final PlaceManager placeManager,
+                              final LangConstants lang) {
         super(eventBus, view, proxy);
         this.dispatcher = dispatcher;
         this.placeManager = placeManager;
