@@ -28,6 +28,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.event.shared.EventBus;
 import com.gwtplatform.dispatch.shared.DispatchAsync;
+import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
@@ -37,35 +38,14 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 import cz.mzk.editor.client.LangConstants;
 import cz.mzk.editor.client.NameTokens;
+import cz.mzk.editor.client.uihandlers.MenuUiHandlers;
 
 /**
  * @author Matous Jobanek
  * @version Oct 8, 2012
  */
-public class MenuPresenter
-        extends Presenter<MenuPresenter.MyView, MenuPresenter.MyProxy> {
-
-    private final LangConstants lang;
-    private final DispatchAsync dispatcher;
-    private final PlaceManager placeManager;
-
-    /**
-     * @param eventBus
-     * @param view
-     * @param proxy
-     */
-    @Inject
-    public MenuPresenter(EventBus eventBus,
-                         MyView view,
-                         MyProxy proxy,
-                         final DispatchAsync dispatcher,
-                         final PlaceManager placeManager,
-                         final LangConstants lang) {
-        super(eventBus, view, proxy);
-        this.dispatcher = dispatcher;
-        this.placeManager = placeManager;
-        this.lang = lang;
-    }
+public class AdminMenuPresenter
+        extends Presenter<AdminMenuPresenter.MyView, AdminMenuPresenter.MyProxy> {
 
     /**
      * @author Matous Jobanek
@@ -83,8 +63,30 @@ public class MenuPresenter
      * @version Oct 8, 2012 The Interface MyView.
      */
     public interface MyView
-            extends View {
+            extends View, HasUiHandlers<MenuUiHandlers> {
 
+    }
+
+    private final LangConstants lang;
+    private final DispatchAsync dispatcher;
+    private final PlaceManager placeManager;
+
+    /**
+     * @param eventBus
+     * @param view
+     * @param proxy
+     */
+    @Inject
+    public AdminMenuPresenter(EventBus eventBus,
+                         MyView view,
+                         MyProxy proxy,
+                         final DispatchAsync dispatcher,
+                         final PlaceManager placeManager,
+                         final LangConstants lang) {
+        super(eventBus, view, proxy);
+        this.dispatcher = dispatcher;
+        this.placeManager = placeManager;
+        this.lang = lang;
     }
 
     /**
@@ -96,4 +98,19 @@ public class MenuPresenter
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onBind() {
+        super.onBind();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onReset() {
+        super.onReset();
+    }
 }
