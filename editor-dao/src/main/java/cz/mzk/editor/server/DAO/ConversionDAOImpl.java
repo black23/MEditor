@@ -109,7 +109,7 @@ public class ConversionDAOImpl
 
                 if (rs.next()) {
                     System.err.println();
-                    item.setConversionDate(formatTimestamp(rs.getTimestamp("lastTimestamp")));
+                    item.setConversionDate(formatTimestampToSeconds(rs.getTimestamp("lastTimestamp")));
                     if (numberOfDays > 0) item.setConverted(!rs.getBoolean("isOlder"));
                 }
 

@@ -1,8 +1,5 @@
 /*
  * Metadata Editor
- * @author Matous Jobanek
- * 
- * 
  * 
  * Metadata Editor - Rich internet application for editing metadata.
  * Copyright (C) 2011  Matous Jobanek (matous.jobanek@mzk.cz)
@@ -36,45 +33,26 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 import cz.mzk.editor.client.LangConstants;
 import cz.mzk.editor.client.NameTokens;
-import cz.mzk.editor.client.uihandlers.AdminHomeUiHandlers;
-import cz.mzk.editor.shared.event.MenuButtonClickedEvent;
-import cz.mzk.editor.shared.event.MenuButtonClickedEvent.MenuButtonClickedHandler;
+import cz.mzk.editor.client.uihandlers.HistoryUiHandlers;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class HomePresenter.
+ * The Class HistoryPresenter.
  * 
  * @author Matous Jobanek
  * @version Oct 30, 2012
  */
-public class AdminHomePresenter
-        extends Presenter<AdminHomePresenter.MyView, AdminHomePresenter.MyProxy>
-        implements AdminHomeUiHandlers {
+public class HistoryPresenter
+        extends Presenter<HistoryPresenter.MyView, HistoryPresenter.MyProxy>
+        implements HistoryUiHandlers {
 
-    /**
-     * The Interface MyView.
-     */
-    public interface MyView
-            extends View, HasUiHandlers<AdminHomeUiHandlers> {
-
-    }
-
-    /**
-     * The Interface MyProxy.
-     */
-    @ProxyCodeSplit
-    @NameToken(NameTokens.ADMIN_HOME)
-    public interface MyProxy
-            extends ProxyPlace<AdminHomePresenter> {
-
-    }
+    /** The lang. */
+    private final LangConstants lang;
 
     /** The dispatcher. */
     private final DispatchAsync dispatcher;
@@ -82,14 +60,27 @@ public class AdminHomePresenter
     /** The left presenter. */
     private final AdminMenuPresenter leftPresenter;
 
-    /** The place manager. */
-    private final PlaceManager placeManager;
+    /**
+     * The Interface MyView.
+     */
+    public interface MyView
+            extends View, HasUiHandlers<HistoryUiHandlers> {
 
-    /** The lang. */
-    private final LangConstants lang;
+        //        void setHistoryDays(List<EditorDate> history);
+    }
 
     /**
-     * Instantiates a new home presenter.
+     * The Interface MyProxy.
+     */
+    @ProxyCodeSplit
+    @NameToken(NameTokens.ADMIN_MENU_BUTTONS.HISTORY)
+    public interface MyProxy
+            extends ProxyPlace<HistoryPresenter> {
+
+    }
+
+    /**
+     * Instantiates a new history presenter.
      * 
      * @param eventBus
      *        the event bus
@@ -97,44 +88,29 @@ public class AdminHomePresenter
      *        the view
      * @param proxy
      *        the proxy
-     * @param leftPresenter
-     *        the left presenter
-     * @param dispatcher
-     *        the dispatcher
-     * @param placeManager
-     *        the place manager
      * @param lang
      *        the lang
      */
     @Inject
-    public AdminHomePresenter(final EventBus eventBus,
-                              final MyView view,
-                              final MyProxy proxy,
-                              final AdminMenuPresenter leftPresenter,
-                              final DispatchAsync dispatcher,
-                              final PlaceManager placeManager,
-                              final LangConstants lang) {
+    public HistoryPresenter(EventBus eventBus,
+                            MyView view,
+                            MyProxy proxy,
+                            final LangConstants lang,
+                            final DispatchAsync dispatcher,
+                            final AdminMenuPresenter leftPresenter) {
         super(eventBus, view, proxy);
-        this.leftPresenter = leftPresenter;
-        this.dispatcher = dispatcher;
-        this.placeManager = placeManager;
         this.lang = lang;
-        bind();
+        this.dispatcher = dispatcher;
+        this.leftPresenter = leftPresenter;
+
     }
 
     /**
-     * On bind. {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     protected void onBind() {
         super.onBind();
-        addRegisteredHandler(MenuButtonClickedEvent.getType(), new MenuButtonClickedHandler() {
-
-            @Override
-            public void onMenuButtonClicked(MenuButtonClickedEvent event) {
-                placeManager.revealRelativePlace(new PlaceRequest(event.getMenuButtonType()));
-            }
-        });
     }
 
     /**
@@ -147,21 +123,11 @@ public class AdminHomePresenter
     }
 
     /**
-     * {@inheritDoc}
+     * Reveal in parent. {@inheritDoc}
      */
     @Override
     protected void revealInParent() {
         RevealContentEvent.fire(this, AdminPresenter.TYPE_ADMIN_MAIN_CONTENT, this);
-    }
-
-    /**
-     * Open medit. {@inheritDoc}
-     */
-    @Override
-    public void openMedit() {
-        System.err.println(placeManager);
-        placeManager.revealRelativePlace(new PlaceRequest(NameTokens.MEDIT_HOME));
-
     }
 
 }

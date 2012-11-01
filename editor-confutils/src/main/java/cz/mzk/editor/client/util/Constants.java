@@ -50,6 +50,9 @@ public class Constants {
     public static final Type<RevealContentHandler<?>> TYPE_ADMIN_LEFT_CONTENT =
             new Type<RevealContentHandler<?>>();
 
+    public static final String LOGO_HTML =
+            "<a href='/meditor'><img class='noFx' src='images/logo_bw.png' width='162' height='50' alt='logo'></a>";
+
     /** The Constant SERVLET_IMAGES_PREFIX. */
     public static final String SERVLET_IMAGES_PREFIX = "images/";
     // must be the same as in web.xml
@@ -241,6 +244,10 @@ public class Constants {
 
     }
 
+    public static enum ACTION_SUBJECTS {
+        DIGITAL_OBJECT, LOG_IN_OUT, USER, LONG_PROCESS, LOCK, SAVED_EDITED, CONVERSION, TREE_STRUCTURE;
+    }
+
     /**
      * The Enum REQUESTS_TO_ADMIN_TYPES.
      */
@@ -268,50 +275,6 @@ public class Constants {
         }
 
     }
-
-    // tables
-
-    /** The Constant TABLE_INPUT_QUEUE_ITEM. */
-    //    public static final String TABLE_INPUT_QUEUE_ITEM = "input_queue_item";
-
-    //    /** The Constant TABLE_INPUT_QUEUE_ITEM_NAME. */
-    //    public static final String TABLE_INPUT_QUEUE_ITEM_NAME = "input_queue_item_name";
-
-    //    /** The Constant TABLE_IMAGE_NAME. */
-    //    public static final String TABLE_IMAGE_NAME = "image";
-
-    //    /** The Constant TABLE_RECENTLY_MODIFIED_NAME. */
-    //    public static final String TABLE_RECENTLY_MODIFIED_NAME = "recently_modified_item";
-
-    //    /** The Constant TABLE_DESCRIPTION. */
-    //    public static final String TABLE_DESCRIPTION = "description";
-
-    //    /** The Constant TABLE_EDITOR_USER. */
-    //    public static final String TABLE_EDITOR_USER = "editor_user";
-
-    //    /** The Constant TABLE_LOCK. */
-    //    public static final String TABLE_LOCK = "lock";
-
-    //    /** The Constant TABLE_STORED_FILES. */
-    //    public static final String TABLE_STORED_FILES = "stored_files";
-
-    //    /** The Constant TABLE_ROLE. */
-    //    public static final String TABLE_ROLE = "role";
-
-    //    /** The Constant TABLE_USER_IN_ROLE. */
-    //    public static final String TABLE_USER_IN_ROLE = "user_in_role";
-
-    //    /** The Constant TABLE_OPEN_ID_IDENTITY. */
-    //    public static final String TABLE_OPEN_ID_IDENTITY = "open_id_identity";
-
-    //    /** The Constant TABLE_VERSION_NAME. */
-    //    public static final String TABLE_VERSION_NAME = "version";
-
-    //    /** The Constant TABLE_TREE_STRUCTURE_NODE_NAME. */
-    //    public static final String TABLE_TREE_STRUCTURE_NODE_NAME = "tree_structure_node";
-
-    //    /** The Constant TABLE_TREE_STRUCTURE_NAME. */
-    //    public static final String TABLE_TREE_STRUCTURE_NAME = "tree_structure";
 
     // tables
 

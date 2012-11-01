@@ -34,6 +34,7 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 import cz.mzk.editor.client.LangConstants;
 import cz.mzk.editor.client.uihandlers.AdminMenuUiHandlers;
@@ -91,8 +92,7 @@ public class AdminMenuPresenter
      */
     @Override
     protected void revealInParent() {
-        // TODO Auto-generated method stub
-
+        RevealContentEvent.fire(this, AdminPresenter.TYPE_ADMIN_LEFT_CONTENT, this);
     }
 
     /**
@@ -110,4 +110,5 @@ public class AdminMenuPresenter
     protected void onReset() {
         super.onReset();
     }
+
 }
