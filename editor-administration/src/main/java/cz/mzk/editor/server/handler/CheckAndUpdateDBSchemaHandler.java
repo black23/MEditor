@@ -139,7 +139,7 @@ public class CheckAndUpdateDBSchemaHandler
                     throw new ActionException(e);
                 }
                 if (upToDate < 0) {
-                    //                    backupCurrentDb();
+                    backupCurrentDb();
                     success = transformDataToNewSchema(version);
                 } else if (upToDate == 0) {
                     try {
