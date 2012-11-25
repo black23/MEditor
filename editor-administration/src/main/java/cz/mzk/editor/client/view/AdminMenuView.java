@@ -139,6 +139,7 @@ public class AdminMenuView
         mainLayout.addMember(new MenuButtonLayout(ADMIN_MENU_BUTTONS.HISTORY, lang.historyMenu()));
         mainLayout.addMember(new MenuButtonLayout(ADMIN_MENU_BUTTONS.STORED, lang.storedMenu()));
         mainLayout.addMember(new MenuButtonLayout(ADMIN_MENU_BUTTONS.STATISTIC, lang.statisticsMenu()));
+        mainLayout.addMember(new MenuButtonLayout(ADMIN_MENU_BUTTONS.USERS, lang.users()));
 
     }
 
