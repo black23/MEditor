@@ -38,6 +38,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 import cz.mzk.editor.client.LangConstants;
 import cz.mzk.editor.client.uihandlers.AdminMenuUiHandlers;
+import cz.mzk.editor.client.util.Constants;
 
 /**
  * @author Matous Jobanek
@@ -92,7 +93,7 @@ public class AdminMenuPresenter
      */
     @Override
     protected void revealInParent() {
-        RevealContentEvent.fire(this, AdminPresenter.TYPE_ADMIN_LEFT_CONTENT, this);
+        RevealContentEvent.fire(this, Constants.TYPE_ADMIN_LEFT_CONTENT, this);
     }
 
     /**
