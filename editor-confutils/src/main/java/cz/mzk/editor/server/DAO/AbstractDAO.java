@@ -381,8 +381,10 @@ public abstract class AbstractDAO {
      * @return the users id
      * @throws DatabaseException
      *         the database exception
+     * @throws SQLException
      */
-    protected long getUsersId(String identifier, USER_IDENTITY_TYPES type) throws DatabaseException {
+    protected long getUsersId(String identifier, USER_IDENTITY_TYPES type, boolean closeCon)
+            throws DatabaseException, SQLException {
         PreparedStatement selectSt = null;
         long userId = -1;
         try {
@@ -415,8 +417,13 @@ public abstract class AbstractDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Query: " + selectSt, e);
+            if (closeCon) {
+                e.printStackTrace();
+            } else {
+                throw new SQLException(e);
+            }
         } finally {
-            closeConnection();
+            if (closeCon) closeConnection();
         }
         return userId;
     }
@@ -424,17 +431,22 @@ public abstract class AbstractDAO {
     /**
      * Gets the user id.
      * 
+     * @param closeCon
+     *        the close con
      * @return the user id
      * @throws DatabaseException
      *         the database exception
+     * @throws SQLException
      */
-    protected Long getUserId() throws DatabaseException {
+    protected Long getUserId(boolean closeCon) throws DatabaseException, SQLException {
         SecurityContext secContext =
                 (SecurityContext) httpSessionProvider.get().getAttribute("SPRING_SECURITY_CONTEXT");
         EditorUserAuthentication authentication = null;
         if (secContext != null) authentication = (EditorUserAuthentication) secContext.getAuthentication();
         if (authentication != null) {
-            return getUsersId((String) authentication.getPrincipal(), authentication.getIdentityType());
+            return getUsersId((String) authentication.getPrincipal(),
+                              authentication.getIdentityType(),
+                              closeCon);
         } else {
             throw new DatabaseException(Constants.SESSION_EXPIRED_FLAG + URLS.ROOT()
                     + (URLS.LOCALHOST() ? URLS.LOGIN_LOCAL_PAGE : URLS.LOGIN_PAGE));
