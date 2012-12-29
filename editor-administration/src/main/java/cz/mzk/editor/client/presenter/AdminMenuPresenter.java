@@ -37,8 +37,12 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 
 import cz.mzk.editor.client.LangConstants;
+import cz.mzk.editor.client.dispatcher.DispatchCallback;
 import cz.mzk.editor.client.uihandlers.AdminMenuUiHandlers;
 import cz.mzk.editor.client.util.Constants;
+import cz.mzk.editor.client.util.Constants.EDITOR_RIGHTS;
+import cz.mzk.editor.shared.rpc.action.HasUserRightsAction;
+import cz.mzk.editor.shared.rpc.action.HasUserRightsResult;
 
 /**
  * @author Matous Jobanek
@@ -64,6 +68,7 @@ public class AdminMenuPresenter
     public interface MyView
             extends View, HasUiHandlers<AdminMenuUiHandlers> {
 
+        void setButtons(boolean showStat, boolean showUsers);
     }
 
     private final LangConstants lang;
@@ -102,6 +107,23 @@ public class AdminMenuPresenter
     @Override
     protected void onBind() {
         super.onBind();
+        dispatcher.execute(new HasUserRightsAction(new EDITOR_RIGHTS[] {EDITOR_RIGHTS.SHOW_STATISTICS,
+                EDITOR_RIGHTS.EDIT_USERS}), new DispatchCallback<HasUserRightsResult>() {
+
+            @Override
+            public void callback(HasUserRightsResult result) {
+                getView().setButtons(result.getOk()[0], result.getOk()[1]);
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void callbackError(Throwable t) {
+                getView().setButtons(false, false);
+            }
+        });
+
     }
 
     /**
