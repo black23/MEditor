@@ -40,8 +40,8 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 import com.smartgwt.client.types.Cursor;
 import com.smartgwt.client.widgets.HTMLFlow;
 import com.smartgwt.client.widgets.form.fields.TextItem;
@@ -258,7 +258,7 @@ public class AppPresenter
 
                                 @Override
                                 public void onClick(com.smartgwt.client.widgets.events.ClickEvent event) {
-                                    placeManager.revealPlace(new PlaceRequest(NameTokens.ADMIN_HOME));
+                                    placeManager.revealRelativePlace(new PlaceRequest(NameTokens.ADMIN_HOME));
                                 }
                             });
 
@@ -313,7 +313,7 @@ public class AppPresenter
      */
     @Override
     protected void revealInParent() {
-        RevealRootContentEvent.fire(this, this);
+        RevealContentEvent.fire(this, Constants.TYPE_ROOT_CONTENT, this);
     }
 
     /*
